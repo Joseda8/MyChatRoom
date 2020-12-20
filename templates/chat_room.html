@@ -1,0 +1,88 @@
+{% extends "template.html" %}
+
+{% block head %}
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+<script src="static/javascript/chat_room.js"></script>
+{% endblock %}
+
+{% block body %}
+
+    <div style="margin-top: 10px" class="row justify-content-around">
+        <div class="col-4" style="text-align: center; margin-top: 10px;">
+            <img src="static/images/logo.png" alt="User Image" width="200px">
+            <br>
+            <label id="username_lbl" style="font-weight: bold;">Welcome to My Chat Room!</label>
+            <br>
+            <label id="roomname_lbl" style="font-weight: bold;"></label>
+        </div>
+        <div class="col-4" style="margin-top: 50px;">
+            <br>
+            <label style="font-weight: bold;">Username</label>
+            <form id="username_form">
+                <div class="form-group">
+                  <input id="username" autocomplete="off" 
+                  autofocus type="text" placeholder="Username" style="height: 30px;">
+                  <button id="set_name_btn"type="submit" class="btn btn-primary btn-sm" style="width: 120px; 
+                  margin-top: -6px; background-color: #006064; border-color: #006064;">Set name</button>
+                  <br>
+                  <span class="help-block">This is the name you will use to identify yourself in the chat room.</span>
+                </div>
+              </form>
+        </div>
+        <div class="col-4" style="margin-top: 50px;">
+            <br>
+            <label style="font-weight: bold;">Create a room</label>
+            <form id="create_room_form">
+                <div class="form-group">
+                <input id="room_name_create" autocomplete="off" 
+                autofocus type="text" placeholder="Room name" style="height: 30px;">
+                <button id="create_room_btn" type="submit" class="btn btn-primary btn-sm" style="width: 120px; 
+                margin-top: -6px; background-color: #006064; border-color: #006064;">Create</button>
+                <br>
+                <span class="help-block">This is the name to identify your room.</span>
+                </div>
+            </form>
+            
+            <label id="lbl_choose_room" style="font-weight: bold;">Choose a room: </label>
+            <select id="room_select" class="form-control" style="width: 315px;" onfocus="this.selectedIndex = -1;">
+                {% for room in rooms %}
+                    <option value="{{ room }}">{{ room }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <hr>
+
+    <div id="messages" style="padding: 1%;">
+    </div>
+
+    <form id="message_form">
+        <div class="form-group">
+            <textarea id="message" class="form-control" 
+            autofocus placeholder="Enter your message"></textarea>
+            <span style="color: white" class="help-block">The maximum number of characters is 500.</span>
+            <button id="send_messages_btn" type="submit" class="btn btn-primary btn-lg btn-block" 
+            style="margin-top: 10px; background-color: #006064; border-color: #006064;">Send message</button>
+        </div>
+      </form>
+
+    <div style="padding: 1%;" class="row justify-content-around">
+        <div class="col-4" style="text-align: center;">
+            <button class="btn btn-primary btn-lg btn-block sound_btn" data-sound="beep" 
+            style="margin-top: 10px; background-color: #006064; border-color: #006064;">Beep</button>
+        </div>
+        <div class="col-4" style="text-align: center;">
+            <button class="btn btn-primary btn-lg btn-block sound_btn" data-sound="applause" 
+            style="margin-top: 10px; background-color: #006064; border-color: #006064;">Applause</button>
+        </div>
+        <div class="col-4" style="text-align: center;">
+            <button class="btn btn-primary btn-lg btn-block sound_btn" data-sound="wrong" 
+            style="margin-top: 10px; background-color: #006064; border-color: #006064;">Wrong</button>
+        </div>
+    </div>
+
+    <audio id="audio" controls hidden>
+        <source type="audio/wav" style="display:none">
+    </audio>
+
+{% endblock %}

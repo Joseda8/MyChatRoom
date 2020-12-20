@@ -1,0 +1,67 @@
+$first_color: #00838f;
+$second_color: #006064;
+$third_color: #e0f7fa;
+
+.flicker {
+    animation-name: flicker_animation;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes flicker_animation {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+html {
+    height: 100%;
+}
+body {
+    height: 100%;
+    margin: 0;
+    background: linear-gradient($third_color, $first_color);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+::selection {
+    color: white;
+    background: $first_color;
+  }
+
+%general_style{
+    color: $first_color;
+}
+
+h1, h2, h3, label{
+    @extend %general_style;
+}
+
+a{
+    @extend %general_style;
+}
+
+a:hover {
+    font-weight: bold;
+    color: $first_color;
+}
+
+form{
+    padding: 1%;
+}
+
+.help-block{
+    color: $first_color;
+    font-size: small;
+}
+
+footer[id=sticky-footer] {
+    color: #ffffff; 
+    background: $second_color; 
+  }
+
+div[id=messages] div{
+    background: #ffffff; 
+    margin-top: 10px;
+    padding: 1%;
+  }
