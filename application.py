@@ -9,11 +9,6 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 socketio = SocketIO(app)
 
-#pip3 install -r requirements.txt
-#set FLASK_APP=application.py
-#http://192.168.1.6:5000/
-#flask run --host=0.0.0.0
-
 # Configure session to use filesystem
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
